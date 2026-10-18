@@ -1,0 +1,57 @@
+# Источники иллюстраций
+
+Все изображения взяты из Викисклада (Wikimedia Commons) и приведены к JPEG с уменьшением
+до ширины 1000 px. Лицензии — public domain, CC0, CC BY и CC BY-SA; авторы указаны ниже.
+Подробности и условия лицензий — по ссылкам в таблице.
+
+| Файл | Слайд | Тема | Автор / источник | Лицензия | Оригинал |
+|---|---|---|---|---|---|
+| `img0.jpg` | 0 | Обложка курса | Linedrive80 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [ML Weiser in the Ink and paint department.jpg](https://commons.wikimedia.org/wiki/File:ML_Weiser_in_the_Ink_and_paint_department.jpg) |
+| `slide5-1.jpg` | 5 | Каменный век | HTO | Public domain | [Lascaux, horse.JPG](https://commons.wikimedia.org/wiki/File:Lascaux,_horse.JPG) |
+| `slide6-1.jpg` | 6 | Вопрос: движение в рисунке | HTO | Public domain | [Lascaux, squares painting.JPG](https://commons.wikimedia.org/wiki/File:Lascaux,_squares_painting.JPG) |
+| `slide6-2.jpg` | 6 | Вопрос: движение в рисунке | Henri Breuil (1877–1961) & Émile Cartailhac (1845–1921) | Public domain | [Altamira paintings 03.jpg](https://commons.wikimedia.org/wiki/File:Altamira_paintings_03.jpg) |
+| `slide7-1.jpg` | 7 | Ответ: наскальная живопись и древние вазы | EU | Public domain | [Lascaux painting.jpg](https://commons.wikimedia.org/wiki/File:Lascaux_painting.jpg) |
+| `slide7-2.jpg` | 7 | Ответ: наскальная живопись и древние вазы | Daderot | CC0 | [Amphora depicting runners, storage jar, Painter of Oxford 218 B, Attic black figure, c. 500 BC, terracotta - Spurlock Museum, UIUC - DSC05721.jpg](https://commons.wikimedia.org/wiki/File:Amphora_depicting_runners,_storage_jar,_Painter_of_Oxford_218_B,_Attic_black_figure,_c._500_BC,_terracotta_-_Spurlock_Museum,_UIUC_-_DSC05721.jpg) |
+| `slide8-1.jpg` | 8 | Тауматроп | Zarateman | CC0 | [Alcobendas - Museo Nacional de Ciencia y Tecnología (MUNCYT), taumatropo.jpg](https://commons.wikimedia.org/wiki/File:Alcobendas_-_Museo_Nacional_de_Ciencia_y_Tecnolog%C3%ADa_(MUNCYT),_taumatropo.jpg) |
+| `slide9-1.jpg` | 9 | Задание: тауматроп | Marcin Wichary from San Francisco, U.S.A. | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Humble beginnings, pt. 1 (2150574179) (2).jpg](https://commons.wikimedia.org/wiki/File:Humble_beginnings,_pt._1_(2150574179)_(2).jpg) |
+| `slide11-1.jpg` | 11 | Зарождение рисованной анимации | Winsor McCay | Public domain | [Winsor McCay (1918) The Sinking of the Lusitania cel (Lusitania rolling over).jpg](https://commons.wikimedia.org/wiki/File:Winsor_McCay_(1918)_The_Sinking_of_the_Lusitania_cel_(Lusitania_rolling_over).jpg) |
+| `slide12-1.jpg` | 12 | Ответ: два кадра | F. Percy Smith | Public domain | [To Demonstrate How Spiders Fly (1909) frame 1.png](https://commons.wikimedia.org/wiki/File:To_Demonstrate_How_Spiders_Fly_(1909)_frame_1.png) |
+| `slide12-2.jpg` | 12 | Ответ: два кадра | F. Percy Smith | Public domain | [To Demonstrate How Spiders Fly (1909) frame 2.png](https://commons.wikimedia.org/wiki/File:To_Demonstrate_How_Spiders_Fly_(1909)_frame_2.png) |
+| `slide13-1.jpg` | 13 | Книги с рисунками | Original author is de:John Barnes Linnet | Public domain | [Linnet kineograph 1886.jpg](https://commons.wikimedia.org/wiki/File:Linnet_kineograph_1886.jpg) |
+| `slide14-1.jpg` | 14 | Задание: книжка-туфли | SunOfErat | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Filmmuseum Berlin - Max Skladanowsky Flip Book.jpg](https://commons.wikimedia.org/wiki/File:Filmmuseum_Berlin_-_Max_Skladanowsky_Flip_Book.jpg) |
+| `slide16-1.jpg` | 16 | Вопрос: аппараты | Zarateman | CC0 | [Alcobendas - Museo Nacional de Ciencia y Tecnología (MUNCYT), taumatropo.jpg](https://commons.wikimedia.org/wiki/File:Alcobendas_-_Museo_Nacional_de_Ciencia_y_Tecnolog%C3%ADa_(MUNCYT),_taumatropo.jpg) |
+| `slide16-2.jpg` | 16 | Вопрос: аппараты | Unknown artistUnknown artist | Public domain | [Optical Toy, Phenakistiscope Disc with Cats and Donkey, ca. 1830 (CH 18607981).jpg](https://commons.wikimedia.org/wiki/File:Optical_Toy,_Phenakistiscope_Disc_with_Cats_and_Donkey,_ca._1830_(CH_18607981).jpg) |
+| `slide16-3.jpg` | 16 | Вопрос: аппараты | не указан | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [Zoetrope (AM 2001.6.1-1).jpg](https://commons.wikimedia.org/wiki/File:Zoetrope_(AM_2001.6.1-1).jpg) |
+| `slide17-1.jpg` | 17 | Ответ: аппараты | Zarateman | CC0 | [Alcobendas - Museo Nacional de Ciencia y Tecnología (MUNCYT), taumatropo.jpg](https://commons.wikimedia.org/wiki/File:Alcobendas_-_Museo_Nacional_de_Ciencia_y_Tecnolog%C3%ADa_(MUNCYT),_taumatropo.jpg) |
+| `slide17-2.jpg` | 17 | Ответ: аппараты | Unknown artistUnknown artist | Public domain | [Optical Toy, Phenakistiscope Disc with Cats and Donkey, ca. 1830 (CH 18607981).jpg](https://commons.wikimedia.org/wiki/File:Optical_Toy,_Phenakistiscope_Disc_with_Cats_and_Donkey,_ca._1830_(CH_18607981).jpg) |
+| `slide17-3.jpg` | 17 | Ответ: аппараты | не указан | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [Zoetrope (AM 2001.6.1-2).jpg](https://commons.wikimedia.org/wiki/File:Zoetrope_(AM_2001.6.1-2).jpg) |
+| `slide18-1.jpg` | 18 | Зоотроп | Photograph by Clem Rutter, Rochester, Kent. (www.clemrutter.net). | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Leeds Industrial Museum zoetrope 7125.JPG](https://commons.wikimedia.org/wiki/File:Leeds_Industrial_Museum_zoetrope_7125.JPG) |
+| `slide19-1.jpg` | 19 | Уильям Джордж Горнер | Sukkoria | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Zoetrope by George Horner - CnAM 20893.jpg](https://commons.wikimedia.org/wiki/File:Zoetrope_by_George_Horner_-_CnAM_20893.jpg) |
+| `slide20-1.jpg` | 20 | Задание: зоотроп | Runner1616 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Zoetrope NN.jpg](https://commons.wikimedia.org/wiki/File:Zoetrope_NN.jpg) |
+| `slide20-2.jpg` | 20 | Задание: зоотроп | Unknown artistUnknown artist | Public domain | [Print, Zoetrope Strip, Dancers, ca. 1860 (CH 18760339).jpg](https://commons.wikimedia.org/wiki/File:Print,_Zoetrope_Strip,_Dancers,_ca._1860_(CH_18760339).jpg) |
+| `slide22-1.jpg` | 22 | Пикселяция | Sviridov, Max | Public domain | [Animacion-con-plastilina-y-clay-animation-pelicula-Kuzmich-153.jpg](https://commons.wikimedia.org/wiki/File:Animacion-con-plastilina-y-clay-animation-pelicula-Kuzmich-153.jpg) |
+| `slide23-1.jpg` | 23 | Stop-motion и Жорж Мельес | Magazine Regards | Public domain | [Georges Méliès.jpg](https://commons.wikimedia.org/wiki/File:Georges_M%C3%A9li%C3%A8s.jpg) |
+| `slide23-2.jpg` | 23 | Stop-motion и Жорж Мельес | Georges Méliès | Public domain | [Trip to the Moon Selenite on Shell.jpg](https://commons.wikimedia.org/wiki/File:Trip_to_the_Moon_Selenite_on_Shell.jpg) |
+| `slide24-1.jpg` | 24 | Норман Мак Ларен | Jack Long/National Film Board of Canada | Public domain | [Norman McLaren drawing on film - 1944.jpg](https://commons.wikimedia.org/wiki/File:Norman_McLaren_drawing_on_film_-_1944.jpg) |
+| `slide25-1.jpg` | 25 | Задание: пикселяция | Consultorlab | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Taller de Stop Motion.jpg](https://commons.wikimedia.org/wiki/File:Taller_de_Stop_Motion.jpg) |
+| `slide27-1.jpg` | 27 | Владислав Старевич | Unknown authorUnknown author | Public domain | [Władysław Starewicz (-1938).jpg](https://commons.wikimedia.org/wiki/File:W%C5%82adys%C5%82aw_Starewicz_(-1938).jpg) |
+| `slide27-2.jpg` | 27 | Владислав Старевич | Wladyslaw Starewicz [1] | Public domain | [Władysław Starewicz - The Ant and the Grasshopper -film scene(1911).png](https://commons.wikimedia.org/wiki/File:W%C5%82adys%C5%82aw_Starewicz_-_The_Ant_and_the_Grasshopper_-film_scene(1911).png) |
+| `slide28-1.jpg` | 28 | Вопрос: выбор куклы | Herzi Pinki | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Marionettes in line.jpg](https://commons.wikimedia.org/wiki/File:Marionettes_in_line.jpg) |
+| `slide29-1.jpg` | 29 | Анимационная кукла | Danylo Maliuha | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Steel Animation Hands with Aluminum Wire Fingers – Armature Puppet (2021).jpg](https://commons.wikimedia.org/wiki/File:Steel_Animation_Hands_with_Aluminum_Wire_Fingers_%E2%80%93_Armature_Puppet_(2021).jpg) |
+| `slide29-2.jpg` | 29 | Анимационная кукла | Jürgen Howaldt | [CC BY-SA 2.0 de](https://creativecommons.org/licenses/by-sa/2.0/de/deed.en) | [PloenMarionetten 1.jpg](https://commons.wikimedia.org/wiki/File:PloenMarionetten_1.jpg) |
+| `slide30-1.jpg` | 30 | Задание: кукольная анимация | Tonynirappathu | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [String puppet puppetry demonstration MGU Kottayam 06.jpg](https://commons.wikimedia.org/wiki/File:String_puppet_puppetry_demonstration_MGU_Kottayam_06.jpg) |
+| `slide32-1.jpg` | 32 | Вопрос: силуэтная техника | Caran d'Ache | Public domain | [Caran d'Ache - Zinc silhouette for the Chat Noir cabaret shadow play L'Épopée (The Epic) - Google Art Project.jpg](https://commons.wikimedia.org/wiki/File:Caran_d%27Ache_-_Zinc_silhouette_for_the_Chat_Noir_cabaret_shadow_play_L%27%C3%89pop%C3%A9e_(The_Epic)_-_Google_Art_Project.jpg) |
+| `slide32-2.jpg` | 32 | Вопрос: силуэтная техника | N.N./Agentur Primrose Film Productions | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Lotte Reiniger Atelier Abbey Arts Centre (cropped).jpg](https://commons.wikimedia.org/wiki/File:Lotte_Reiniger_Atelier_Abbey_Arts_Centre_(cropped).jpg) |
+| `slide33-1.jpg` | 33 | Лотте Райнигер | N.N./Agentur Primrose Film Productions | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Lotte Reiniger 1922.jpg](https://commons.wikimedia.org/wiki/File:Lotte_Reiniger_1922.jpg) |
+| `slide33-2.jpg` | 33 | Лотте Райнигер | N.N./Agentur Primrose Film Productions | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Lotte Reiniger London 1970.jpg](https://commons.wikimedia.org/wiki/File:Lotte_Reiniger_London_1970.jpg) |
+| `slide34-1.jpg` | 34 | Приключения принца Ахмеда | Lotte Reiniger/Primrose Productions | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Lotte Reiniger Prinz Achmed 002.jpg](https://commons.wikimedia.org/wiki/File:Lotte_Reiniger_Prinz_Achmed_002.jpg) |
+| `slide35-1.jpg` | 35 | Задание: Schwibbogen | Geolina163 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Schwibbogen beleuchtet 2014.jpg](https://commons.wikimedia.org/wiki/File:Schwibbogen_beleuchtet_2014.jpg) |
+| `slide38-1.jpg` | 38 | Вопрос: наскальный рисунок и скрайбинг | unknown prehistoric artist | Public domain | [Altamira, bison.jpg](https://commons.wikimedia.org/wiki/File:Altamira,_bison.jpg) |
+| `slide38-2.jpg` | 38 | Вопрос: наскальный рисунок и скрайбинг | Alanna George from Munith, USA | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [AL Scrapbook Page.jpg](https://commons.wikimedia.org/wiki/File:AL_Scrapbook_Page.jpg) |
+| `slide40-1.jpg` | 40 | Скрайбинг | Alanna George from Munith, USA | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [AL Scrapbook Page.jpg](https://commons.wikimedia.org/wiki/File:AL_Scrapbook_Page.jpg) |
+| `slide41-1.jpg` | 41 | Скрайбинг: возможности | Renee from USA | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Example Vintage.png](https://commons.wikimedia.org/wiki/File:Example_Vintage.png) |
+
+## Благодарность
+
+Изображения принадлежат их авторам и правообладателям. Курс распространяется бесплатно
+и используется в образовательных целях.

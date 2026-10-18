@@ -46,6 +46,8 @@ aside{width:330px;flex:none;position:sticky;top:0;height:100vh;padding:16px;z-in
 .grp li button:hover{background:var(--bg)}
 .grp li.cur button{background:var(--deep);color:#f1eee2}
 .dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--sage);flex:none;font-size:10px;line-height:13px;text-align:center;color:#fff}
+.cred{margin:26px 8px 4px;font-size:11px;line-height:1.5;color:var(--mut)}
+.cred a{color:var(--deep)}
 .done .dot{background:var(--sage);border-color:var(--sage)}
 .done .dot::before{content:"✓"}
 .cur .dot{border-color:#f1eee2}
@@ -79,6 +81,8 @@ h3{font:500 24px/1.2 var(--serif);margin-bottom:12px}
 .ans{margin-top:18px;padding:22px;border-radius:20px;background:rgba(255,255,255,.1)}
 .ans[hidden]{display:none}
 .pic{display:block;max-width:100%;max-height:300px;border-radius:18px;margin-top:12px}
+.pics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;margin-top:14px}
+.pics .pic{margin-top:0;width:100%;height:auto;max-height:280px;object-fit:contain;background:var(--bg)}
 .media{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin-top:16px}
 .vid{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#222 center/cover;border:0;cursor:pointer;width:100%}
 .vid::after{content:"";position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a5740' d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") center/32px no-repeat;transition:.2s}
@@ -87,7 +91,7 @@ h3{font:500 24px/1.2 var(--serif);margin-bottom:12px}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .intro{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
 .intro p{color:var(--mut)}
-.blob{aspect-ratio:1/1.05;background:url(img0.jpg) 62% center/cover;border-radius:62% 38% 46% 54%/48% 56% 44% 52%}
+.blob{aspect-ratio:1/1.05;background:url(img/img0.jpg) 62% center/cover;border-radius:62% 38% 46% 54%/48% 56% 44% 52%}
 .auth{font-size:13px;color:var(--mut);margin:18px 0 24px}
 .ch{text-align:center;padding:72px 24px}
 .ch i{display:block;font:italic 400 clamp(90px,16vw,150px)/1 var(--serif);color:var(--sage);opacity:.6}
@@ -122,6 +126,7 @@ h3{font:500 24px/1.2 var(--serif);margin-bottom:12px}
   <div class="logo">Экскурсия по истории <em>анимации</em></div>
   <div class="pr"><small><span>Пройдено</span><span id="pct">0%</span></small><div class="track"><i id="pbar"></i></div></div>
   <div id="toc"></div>
+  <p class="cred">Иллюстрации — Викисклад, лицензии авторов: <a href="https://github.com/animixit/course/blob/main/CREDITS.md" target="_blank" rel="noopener">источники</a></p>
 </div></aside>
 <main>
   <div class="top"><button id="menu">☰ Содержание</button></div>
@@ -132,7 +137,7 @@ h3{font:500 24px/1.2 var(--serif);margin-bottom:12px}
 <script>
 var VK = "https://vk.com/club187914593";
 
-/* Слайды. o — номер слайда в исходном курсе (по нему ищется необязательная картинка img/slide{o}.jpg),
+/* Слайды. o — номер слайда в исходном курсе (по нему ищется необязательная картинка img/slide{o}-{k}.jpg, см. PIC),
    k — тип: p обычный, q вопрос, a ответ, t задание, h глава, c обложка, tl лента времени, quiz, end.
    b — абзацы (строка) или списки (массив), v — ID видео YouTube. */
 function S(o,k,h,b,v){return {o:o,k:k,h:h,b:b||[],v:v||[]}}
@@ -210,6 +215,40 @@ var QUIZ = [
 ["Кто изобрёл скрайбинг?",["Мари-Жорж-Жан Мельес","Уильям Джордж Горнер","Эндрю Парк","Норман Мак Ларен"],2]
 ];
 
+/* Иллюстрации: сколько картинок у слайда (img/slide{o}-{k}.jpg) и что на них изображено. */
+var PIC = {5:1,6:2,7:2,8:1,9:1,11:1,12:2,13:1,14:1,16:3,17:3,18:1,19:1,20:2,22:1,23:2,24:1,25:1,27:2,28:1,29:2,30:1,32:2,33:2,34:1,35:1,38:2,40:1,41:1};
+var ALT = {
+ 5:"Наскальная роспись пещеры Ласко",
+ 6:"Наскальные рисунки с изображением движения животных",
+ 7:"Движение в наскальной живописи и в росписи древней вазы",
+ 8:"Тауматроп",
+ 9:"Тауматроп в музейной витрине",
+ 11:"Рисованный кадр из мультфильма Уинсора Маккея",
+ 12:"Два последовательных кадра",
+ 13:"Книжка-туфли лайнет",
+ 14:"Книжка-туфли в руках",
+ 16:"Тауматроп, фенакистископ и зоотроп",
+ 17:"Тауматроп, фенакистископ и зоотроп",
+ 18:"Зоотроп — барабан с прорезями",
+ 19:"Зоотроп работы Уильяма Джорджа Горнера",
+ 20:"Зоотроп и лента с рисунками",
+ 22:"Кадр из кукольной анимации",
+ 23:"Жорж Мельес и кадр из фильма «Полёт на Луну»",
+ 24:"Норман Мак Ларен рисует на плёнке",
+ 25:"Съёмка stop motion",
+ 27:"Владислав Старевич и кадр из его фильма",
+ 28:"Куклы-марионетки",
+ 29:"Каркас анимационной куклы и марионетка",
+ 30:"Аниматор управляет куклой",
+ 32:"Силуэтная техника и мастерская Лотте Райнигер",
+ 33:"Лотте Райнигер",
+ 34:"Кадр из фильма «Приключения принца Ахмеда»",
+ 35:"Schwibbogen — светящаяся рождественская горка",
+ 38:"Наскальный рисунок и страница скрапбука",
+ 40:"Страница скрапбука",
+ 41:"Пример оформления страницы скрапбука"
+};
+
 
 
 
@@ -218,7 +257,12 @@ function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g
 function link(s){return esc(s).replace(/https?:\/\/[^\s<]+/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>'})}
 function body(b){return b.map(function(x){return Array.isArray(x)?"<ol>"+x.map(function(i){return "<li>"+link(i)+"</li>"}).join("")+"</ol>":"<p>"+link(x)+"</p>"}).join("")}
 function vids(v){return v.length?'<div class="media">'+v.map(function(id){return '<button class="vid" data-v="'+id+'" aria-label="Смотреть видео" style="background-image:url(https://i.ytimg.com/vi/'+id+'/hqdefault.jpg)"></button>'}).join("")+"</div>":""}
-function pic(o){return '<img class="pic" src="img/slide'+o+'.jpg" alt="" onerror="this.remove()">'}
+function pic(o){
+  var n=PIC[o],h="",k;
+  if(!n)return "";
+  for(k=1;k<=n;k++)h+='<img class="pic" src="img/slide'+o+"-"+k+'.jpg" alt="'+(n>1?ALT[o]+" ("+k+")":ALT[o])+'" onerror="this.remove()">';
+  return n>1?'<div class="pics">'+h+"</div>":h;
+}
 function inner(s){return body(s.b)+vids(s.v)+pic(s.o)}
 
 /* шаги курса */
@@ -252,7 +296,7 @@ function toc(){
 function view(st){
   var s=st.s, gr=groups[st.g], cr='<div class="crumb">'+(gr.n?"Глава "+gr.n+" · ":"")+esc(gr.h)+"</div>";
   switch(st.k){
-  case "intro": return '<div class="card"><div class="intro"><div><h1>Виртуальная экскурсия по истории <em>анимации</em></h1><p>От наскальных рисунков до скрайбинга: семь глав, видео и творческие задания, которые можно выполнить дома.</p><div class="auth">Авторы курса: Ольга Николаевна Лобанова, педагог дополнительного образования МУ ДО ДДТ «Автограф», г. Нерехта; Нина Дмитриевна Разумова, методист высшей категории.</div><button class="btn" data-s="1">Начать курс</button></div><div class="blob" role="img" aria-label="Рабочий стол иллюстратора"></div></div></div>';
+  case "intro": return '<div class="card"><div class="intro"><div><h1>Виртуальная экскурсия по истории <em>анимации</em></h1><p>От наскальных рисунков до скрайбинга: семь глав, видео и творческие задания, которые можно выполнить дома.</p><div class="auth">Авторы курса: Ольга Николаевна Лобанова, педагог дополнительного образования МУ ДО ДДТ «Автограф», г. Нерехта; Нина Дмитриевна Разумова, методист высшей категории.</div><button class="btn" data-s="1">Начать курс</button></div><div class="blob" role="img" aria-label="Цех покраски мультфильмовых целов"></div></div></div>';
   case "about":
     var b=SLIDES[1].b;
     return cr+"<h2>"+esc(SLIDES[1].h)+'</h2><p style="color:var(--mut);margin-bottom:20px">'+esc(b[0])+"</p>"+[[1,2],[3,4],[5,6]].map(function(p,k){return '<div class="card'+(k==1?" sage":"")+'"><h3>'+esc(b[p[0]].replace(":",""))+"</h3><ul>"+b[p[1]].map(function(t){return "<li>"+esc(t)+"</li>"}).join("")+"</ul></div>"}).join("");
