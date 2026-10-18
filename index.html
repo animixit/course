@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Виртуальная экскурсия по истории анимации</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>
+:root{--bg:#ebe7da;--card:#f6f4ec;--ink:#22261e;--mut:#5e6455;--sage:#7d876f;--deep:#4a5740;--acc:#d9703a;--line:#d8d4c4;--serif:"Playfair Display",Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;display:flex;min-height:100vh}
+a{color:var(--deep)}
+button{font-family:inherit}
+/* оглавление */
+aside{width:330px;flex:none;position:sticky;top:0;height:100vh;padding:16px;z-index:20}
+.in{background:var(--card);border-radius:28px;height:100%;overflow:auto;padding:24px 16px;scrollbar-width:thin}
+.logo{font:500 22px/1.2 var(--serif);padding:0 8px}
+.logo em{color:var(--sage)}
+.pr{margin:18px 8px 22px}
+.pr small{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:6px;font-weight:600}
+.track{height:6px;background:var(--line);border-radius:9px;overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--deep);border-radius:9px;transition:width .4s}
+.grp>button{width:100%;text-align:left;background:none;border:0;cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:10px 8px;border-radius:14px;font-weight:700;font-size:14px;color:var(--ink)}
+.grp>button:hover{background:var(--bg)}
+.grp>button span{font:italic 400 18px var(--serif);color:var(--sage);min-width:26px}
+.grp ul{list-style:none;display:none;margin:2px 0 8px 8px;border-left:1px solid var(--line);padding-left:6px}
+.grp.open ul{display:block}
+.grp li button{width:100%;text-align:left;background:none;border:0;cursor:pointer;display:flex;gap:10px;align-items:center;padding:7px 10px;border-radius:12px;font-size:13px;color:var(--mut)}
+.grp li button:hover{background:var(--bg)}
+.grp li.cur button{background:var(--deep);color:#f1eee2}
+.dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--sage);flex:none;font-size:10px;line-height:13px;text-align:center;color:#fff}
+.done .dot{background:var(--sage);border-color:var(--sage)}
+.done .dot::before{content:"✓"}
+.cur .dot{border-color:#f1eee2}
+.cur.done .dot{background:#f1eee2;color:var(--deep)}
+/* основная область */
+main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{display:none;align-items:center;gap:12px;padding:12px 16px}
+.top button{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:600;font-size:13px;cursor:pointer}
+.stage{flex:1;width:100%;max-width:900px;margin:0 auto;padding:32px 32px 24px}
+.stage>div{animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.crumb{font-size:13px;color:var(--mut);font-weight:600;margin-bottom:14px}
+.card{background:var(--card);border-radius:28px;padding:36px;margin-bottom:16px}
+.card.dark{background:var(--deep);color:#f1eee2}
+.card.dark p,.card.dark li{color:#e4e1d3}
+.card.sage{background:var(--sage);color:#fff}
+.tag{display:inline-block;font:700 11px Manrope;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:4px 12px;margin-bottom:16px;opacity:.85}
+.tag.t{color:var(--acc);opacity:1}
+h1,h2{font:500 clamp(30px,4vw,44px)/1.12 var(--serif);margin-bottom:18px}
+h1 em{color:var(--sage)}
+h3{font:500 24px/1.2 var(--serif);margin-bottom:12px}
+.card p{margin-bottom:12px}
+.card ul,.card ol{margin:0 0 12px 20px}
+.card li{margin-bottom:6px}
+.card li::marker{color:var(--sage)}
+.btn{display:inline-block;border:0;cursor:pointer;font:600 14px Manrope,sans-serif;background:var(--deep);color:#f1eee2;border-radius:999px;padding:13px 26px;text-decoration:none;transition:.2s}
+.btn:hover:not(:disabled){background:#3b4733}
+.btn.acc{background:var(--acc)}.btn.acc:hover{background:#c0602d!important}
+.btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn:disabled{opacity:.35;cursor:default}
+.ans{margin-top:18px;padding:22px;border-radius:20px;background:rgba(255,255,255,.1)}
+.ans[hidden]{display:none}
+.pic{display:block;max-width:100%;max-height:300px;border-radius:18px;margin-top:12px}
+.media{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin-top:16px}
+.vid{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#222 center/cover;border:0;cursor:pointer;width:100%}
+.vid::after{content:"";position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234a5740' d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") center/32px no-repeat;transition:.2s}
+.vid:hover::after{transform:scale(1.08)}
+.vid.on::after{display:none}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.intro{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+.intro p{color:var(--mut)}
+.blob{aspect-ratio:1/1.05;background:url(img0.jpg) 62% center/cover;border-radius:62% 38% 46% 54%/48% 56% 44% 52%}
+.auth{font-size:13px;color:var(--mut);margin:18px 0 24px}
+.ch{text-align:center;padding:72px 24px}
+.ch i{display:block;font:italic 400 clamp(90px,16vw,150px)/1 var(--serif);color:var(--sage);opacity:.6}
+.ch h2{max-width:600px;margin:0 auto}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tl button{background:var(--bg);border:0;border-radius:20px;padding:18px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;min-height:130px;transition:.2s;color:var(--ink)}
+.tl button:hover{background:var(--deep);color:#f1eee2}
+.tl b{font:500 22px/1.1 var(--serif)}
+.tl span{font-size:13px;margin-top:auto;opacity:.75}
+.opt{display:block;width:100%;text-align:left;font:500 15px Manrope;margin-top:10px;padding:14px 20px;border:1px solid var(--line);border-radius:999px;background:var(--bg);cursor:pointer;color:var(--ink);transition:.2s}
+.opt:hover:not(:disabled){border-color:var(--deep)}
+.opt.ok{background:#cfe0c3;border-color:#7ea66b}
+.opt.bad{background:#f0cfc4;border-color:#d88a72}
+.end{text-align:center;padding:64px 24px}
+.end p{max-width:480px;margin:0 auto 24px}
+/* нижняя панель */
+.bar{position:sticky;bottom:12px;margin:0 auto 12px;width:calc(100% - 32px);max-width:868px;display:flex;align-items:center;gap:16px;padding:8px;background:rgba(246,244,236,.9);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px}
+.bar .mid{flex:1;text-align:center;font-size:12px;font-weight:600;color:var(--mut)}
+@media(max-width:900px){
+ aside{position:fixed;left:0;top:0;transform:translateX(-105%);transition:.3s;width:min(330px,92vw)}
+ aside.show{transform:none}
+ .top{display:flex}
+ .stage{padding:8px 16px 16px}
+ .card{padding:24px}
+ .intro{grid-template-columns:1fr}.blob{order:-1;aspect-ratio:1.4/1}
+ .bar .mid span{display:none}
+}
+</style>
+</head>
+<body>
+<aside id="aside"><div class="in">
+  <div class="logo">Экскурсия по истории <em>анимации</em></div>
+  <div class="pr"><small><span>Пройдено</span><span id="pct">0%</span></small><div class="track"><i id="pbar"></i></div></div>
+  <div id="toc"></div>
+</div></aside>
+<main>
+  <div class="top"><button id="menu">☰ Содержание</button></div>
+  <div class="stage" id="stage" role="main" aria-live="polite"></div>
+  <div class="bar"><button class="btn ghost" id="prev" style="color:var(--deep)">Назад</button><div class="mid" id="mid"></div><button class="btn" id="next">Далее</button></div>
+</main>
+
+<script>
+var VK = "https://vk.com/club187914593";
+
+/* Слайды. o — номер слайда в исходном курсе (по нему ищется необязательная картинка img/slide{o}.jpg),
+   k — тип: p обычный, q вопрос, a ответ, t задание, h глава, c обложка, tl лента времени, quiz, end.
+   b — абзацы (строка) или списки (массив), v — ID видео YouTube. */
+function S(o,k,h,b,v){return {o:o,k:k,h:h,b:b||[],v:v||[]}}
+
+var SLIDES = [
+S(1,"c","Виртуальная экскурсия по истории анимации"),
+S(2,"p","Аннотация курса",[
+ "Модуль по истории анимации познакомит тебя с увлекательными изобретениями мультипликации.",
+ "Ты узнаешь:",
+ ["как называются приборы для создания анимации, кто их автор и где их можно использовать","познакомишься с творчеством известных аниматоров, которые стали основоположниками анимационных техник"],
+ "Ты научишься:",
+ ["делать оптические приборы и придумывать варианты их усовершенствования","осуществлять покадровую съёмку в домашних условиях"],
+ "Курс будет полезен и интересен, если вы:",
+ ["любите смотреть мультфильмы и хотите создать собственный мультфильм","считаете, что любую науку необходимо изучать с истоков","хотите раскрыть некоторые секреты мультипликации"]]),
+S(3,"tl","История анимации",["У тебя появилась уникальная возможность, передвигаясь по ленте времени, отправиться в путешествие по истории анимации."]),
+
+S(4,"h","Простейшая анимация","Глава 01"),
+S(5,"p","Каменный век",["Первыми попытками запечатлеть движение были пещерные рисунки, на которых человек изображал сцены охоты."]),
+S(6,"q","Вопрос",["Рассмотри рисунки, подумай, в чём отличие?"]),
+S(7,"a","Ответ",["Чтобы узнать правильный ответ, посмотри следующее видео.","Эффект движения в наскальной живописи создавался за счёт изображения большого количества ног, хвостов. Рисунок наносили пальцами или палочками, используя натуральные красители, смешанные с древесной смолой, контур выскабливали. Эффект усиливался благодаря нанесению изображения на выступ скалы.","Обрати внимание, что такие движения встречаются и в росписи древних ваз."],["cJ3Z6A6s8IU"]),
+S(8,"p","Тауматроп",["Простейшей анимацией считают тауматроп, который изобрёл Генри Фиттон."]),
+S(9,"t","Задание",["Посмотри видеоролик по созданию тауматропа.","Создай тауматроп, придумай свои варианты исполнения. Сними на мобильный телефон. Если не можешь снять сам, попроси друга или родителей.","Размести результат в группе "+VK+".","Оцени работы других участников с помощью лайка."],["SpKzbwJEjIs"]),
+
+S(10,"h","Зарождение рисованной анимации","Глава 02"),
+S(11,"q","Вопрос",["Посмотри 2 видеоролика последовательно. Где движения более плавные? Почему?"],["xF7JLwcxiE0","SBbTJDyd-iI"]),
+S(12,"a","Ответ",["Видео 1. Способ запечатлеть движение, используя всего 2 кадра, даёт очень резкую картинку смены событий.","Видео 2. Способ, в котором увеличено количество кадров, делает движения более плавными."]),
+S(13,"p","Книги с рисунками",["В 15 веке появились книги с рисунками, воспроизводившими фазы движения человека и животных. Свёрнутые в рулон, а затем мгновенно разворачивающиеся, книжки создавали иллюзию оживших рисунков."]),
+S(14,"t","Задание",["Посмотри видеоролик по созданию «карманного мультфильма».","Изготовь свой «карманный мультфильм», увеличивая количество кадров.","Инструкция:",["Возьми блокнот или блок со стикерами. Можно склеить блокнот из нарезанных одинакового размера листов бумаги или использовать штифт для соединения страниц.","Продумай персонажа и его движения.","Начинай рисовать с нижнего листа. Вариантом сюжета могут быть часы с бегущими стрелками, вырастающий цветок.","На следующей странице изменяй фазу движения.","Сделай от 12 до 24 картинок."],"Сними на мобильный телефон свой вариант в движении, размести результат в группе "+VK+" и оцени работу других участников."],["wddgaczqeRM"]),
+
+S(15,"h","Первые аппараты для передачи движения","Глава 03"),
+S(16,"q","Вопрос",["Посмотри на эти рисунки устройств. Как ты думаешь, что это такое?"]),
+S(17,"a","Ответ",["Тауматроп — склеенные между собой бумажные круги с разными изображениями, при быстром вращении воспринимаются как одна целая картинка.","Фенакистископ — аппарат для демонстрации движущихся изображений.","Зоотроп — лабораторный прибор для демонстрации движущихся рисунков."]),
+S(18,"p","Зоотроп",["Процесс съёмки настоящего мультфильма требует специальной техники. Нужны фотоаппарат или видеокамера, освещение, компьютер с установленными программами. Но в конце 19 века современных приборов для съёмки ещё не было. Люди пытались придумать разные аппараты для передачи движения, один из которых — зоотроп."]),
+S(19,"p","Зоотроп",["Прибор изобрёл Уильям Джордж Горнер. Это был барабан с прорезями, через которые в процессе вращения можно наблюдать движение, предварительно нарисованное по фазам на ленте. Его конструкция основана на способности сетчатки человеческого глаза сохранять изображения."],["la6L1l9jGRI"]),
+S(20,"t","Задание",["Посмотри видеоролик по созданию «зоотропа».","Посмотри видео, изучи технологию изготовления, создай свой зоотроп.","Инструкция:",["Изучи конструкцию зоотропа, придумай свой вариант исполнения.","Подготовь материалы.","Нарисуй ленту, состоящую из 12 рисунков, изображающих последовательное движение; можно слепить фигурки из пластилина.","Придумай и изготовь каркас.","Собери аппарат.","Проверь зоотроп в действии.","Сними свой вариант в движении на мобильный, выложи в группу "+VK+" и оцени работу других участников."]],["u2v-L-1Kctk"]),
+
+S(21,"h","Изобретение техники пикселяция. «Stop-motion» анимация","Глава 04"),
+S(22,"p","Пикселяция",["Это техника анимации, при которой реальные актёры или предметы снимаются покадрово. Потом сюжет монтируется с целью достичь какой-либо необычной ситуации, которую без применения подобного трюка не снимешь. Можно очень правдоподобно сделать летающих людей или «оживить» вещи."]),
+S(23,"p","Stop-motion",["Основоположником данной техники был Мари-Жорж-Жан Мельес, французский режиссёр и артист цирка, изобретатель кинотрюков. Идея первого трюка возникла случайно. Мельес пересматривал свой фильм, снятый на площади Оперы, и был удивлён тем, что одна машина вдруг внезапно превратилась в другую. Он быстро нашёл объяснение этому феномену — движение плёнки во время съёмки ненадолго остановилось.","В 1896 году он придумал способ создания первых кинотрюков, основанных на стоп-кадре, то есть покадровой съёмке. Секрет в том, что зритель воспринимает такие сюжеты как видеосъёмку в режиме реального времени, но на самом деле съёмка покадровая. Техника основана на соединении нескольких десятков стоп-кадров."],["XZpgpr-P2C4"]),
+S(24,"p","Stop-motion",["Идею stop-motion анимации развил Норман Мак Ларен. Посмотрите следующее видео, которое рассказывает об этой технике."],["NuKo_Gs_Db4"]),
+S(25,"t","Задание",["Посмотри видеоролик — пример пикселяции.","Придумай и сними свой сюжет.","Инструкция:",["Скачай на мобильный телефон программу Stop Motion Studio.","Нажми на иконку со знаком «+».","В верхнем правом углу нажми на кнопку с изображением фотоаппарата.","Делай кадры, нажимая на красную кнопку.","Передвигая на левой панели синий рычажок, можно настроить видимость предыдущих кадров.","Сохрани отснятый сюжет кнопкой «выбрать».","Нажми на выбранный сюжет.","Поделись с участниками группы "+VK+", используя кнопку на верхней панели «экспортировать в ВК»."]],["7HgjwN2SW0w"]),
+
+S(26,"h","Зарождение объёмной анимации","Глава 05"),
+S(27,"p","Объёмная анимация",["Основателем кукольной анимации был Владислав Старевич. Предлагаем вам посмотреть видео об истории создания объёмной анимации."],["SHB1G7NTCng"]),
+S(28,"q","Вопрос",["Подумайте, любую ли куклу можно выбрать для анимации? Какую куклу выбрали бы вы?"]),
+S(29,"p","Анимационная кукла",["Особенности анимационной куклы:",["проволочная или шарнирная конструкция внутри куклы;","одежда должна быть выразительной, но в то же время без лишних деталей, чтобы позволять аниматору передвигать персонажа. Часто в одежду или волосы вшивается тонкая проволочка — кантин — для удобства анимации, например, когда нужно снять ветер;","обувь куклы прикрепляется к макету специальными гвоздиками. Такое крепление обеспечивает устойчивость и в то же время позволяет сравнительно легко менять положение куклы на макете."],"Только руки аниматора могут оживить куклу и разбудить эмоции зрителя, заставить его радоваться и печалиться, то есть жить."]),
+S(30,"t","Задание",["Посмотри видеоролик — как создаётся кукольная мультипликация.","Сними свой сюжет, используя инструкцию:",["Открой программу Stop Motion Studio.","Нажми на иконку со знаком «+».","В верхнем правом углу нажми на кнопку с изображением фотоаппарата.","Передвигай подвижные детали куклы буквально по миллиметрам, фиксируй каждое движение, нажимая на красную кнопку.","Передвигая на левой панели синий рычажок, можно настроить видимость предыдущих кадров.","Сохрани отснятый сюжет кнопкой «выбрать».","Нажми на выбранный сюжет.","Поделись с участниками группы "+VK+", используя кнопку на верхней панели «экспортировать в ВК»."]],["RP-dO8-xwxA"]),
+
+S(31,"h","История силуэтной техники","Глава 06"),
+S(32,"q","Вопрос",["Посмотри на следующую схему. Как ты думаешь, какая техника анимации возникла в следующем периоде?"]),
+S(33,"p","Силуэтная анимация",["Создательница силуэтной анимации — Лотте Райнигер, автор первого полнометражного мультфильма и одна из ярчайших анимационных художниц XX века.","Свои фильмы Райнигер делала в стиле театра теней (такая техника получила название «силуэтной анимации»). Райнигер вырезала из бумаги детали, которые потом с помощью ниток и проволоки складывались в силуэты, каждую деталь она резала из тонкого свинца или бумаги. Иногда бумажная кукла, от которой на экране оставался только силуэт, могла состоять из 40–50 подвижных частей. Из бумаги же вырезались и декорации — ажурные и многослойные, отлично передающие ощущение перспективы."]),
+S(34,"p","Силуэтная анимация",["Самой известной работой режиссёра стала её картина «Приключения принца Ахмеда» — первый из сохранившихся полнометражных анимационных фильмов."],["R_9JlTJH1Lo"]),
+S(35,"t","Задание",["Освоение этой техники позволит вам создать свой домашний теневой театр или снять этюд в силуэтной технике. В Германии очень популярно одно из направлений силуэта — Schwibbogen. Фигуры вырезаются из дерева и украшают окна, которые очень красиво смотрятся сквозь зажжённый свет в вечернее время и ночью.","Придумай персонажа и изготовь марионетку в силуэтной технике. Используй схему для создания.","Полученное видео размести в группе ВКонтакте "+VK+"."],["yYTXxkR_myc"]),
+
+S(37,"h","Скрайбинг","Глава 07"),
+S(38,"q","Вопрос",["Сравни ниже рисунки. Что общего в этих рисунках? А какие различия ты увидел?"]),
+S(39,"a","Ответ",["Обрати внимание на определения под рисунком.","Наскальный рисунок статичный, хотя и передаёт движение.","Скрайбинг оживляется прямо на глазах по ходу повествования. Он динамичен и создан с помощью современных технологий."]),
+S(40,"p","Скрайбинг",["Скрайбинг изобрёл британский художник Эндрю Парк для организации, занимающейся популяризацией научных знаний. Скрайбинг — это современная технология визуализации учебного материала."]),
+S(41,"p","Скрайбинг",["Возможности скрайбинга:",["может быть опорой при обучении","позволяет доносить до зрителя сложную информацию в доступной форме","большой объём информации можно представить в виде динамичных схем","эффективный способ привлечь внимание аудитории, если хотите интересно подать информацию"]]),
+S(42,"t","Задание",["Мы все немного скрайберы, потому что сначала научились рисовать, а уже потом писать. Изображая простые картинки, можно рассказать любую историю. Посмотри инструкцию по созданию скрайба.","Разработай идею. Подготовь рисунки-скетчи, где ты можешь использовать картинки, символы, цифры, знаки, стрелочки, облачка, ключевые слова; можно использовать зачёркивания, если это необходимо по сюжету. Сними процесс отрисовки на телефон, запиши звук. Используя полученные знания, создай скрайбинг в покадровой съёмке: для этого в программе Stop Motion Studio используй кнопку с изображением часов, потом запиши звук, нажав на микрофон.","Полученное видео размести в группе ВКонтакте "+VK+"."],["OdgGmkra0kI"]),
+S(43,"quiz","Итоговый тест"),
+S(44,"end","Поздравляем!",["Поздравляем, ты дошёл до конца и выполнил все задания. Все они размещены в группе:",VK])
+];
+
+/* Лента времени: [дата, подпись, номер слайда в массиве SLIDES (с 0)] */
+var TL = [["4–5 в. до н. э.","Простейшая анимация",3],["15 век","Зарождение рисованной анимации",9],["19 век","Первые аппараты для передачи движения",14],["1836 год","Изобретение техники пикселяция «Stop-motion» анимации",20],["1912","Зарождение объёмной анимации",25],["1919 год","История силуэтной техники",30],["Наши дни","Скрайбинг",35]];
+
+/* Итоговый тест (по материалам курса). Формат: [вопрос, [варианты], номер верного] */
+var QUIZ = [
+["Кто изобрёл тауматроп?",["Уильям Джордж Горнер","Генри Фиттон","Лотте Райнигер","Эндрю Парк"],1],
+["Кто изобрёл зоотроп?",["Уильям Джордж Горнер","Мари-Жорж-Жан Мельес","Норман Мак Ларен","Владислав Старевич"],0],
+["Что такое пикселяция?",["Рисование на стекле","Покадровая съёмка реальных актёров и предметов","Анимация силуэтов из бумаги","Компьютерная 3D-графика"],1],
+["Кто считается основателем кукольной анимации?",["Лотте Райнигер","Эндрю Парк","Владислав Старевич","Генри Фиттон"],2],
+["Как называется первый из сохранившихся полнометражных анимационных фильмов?",["«Приключения принца Ахмеда»","«Карманный мультфильм»","«Зоотроп»","«Театр теней»"],0],
+["Кто изобрёл скрайбинг?",["Мари-Жорж-Жан Мельес","Уильям Джордж Горнер","Эндрю Парк","Норман Мак Ларен"],2]
+];
+
+
+
+
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function link(s){return esc(s).replace(/https?:\/\/[^\s<]+/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>'})}
+function body(b){return b.map(function(x){return Array.isArray(x)?"<ol>"+x.map(function(i){return "<li>"+link(i)+"</li>"}).join("")+"</ol>":"<p>"+link(x)+"</p>"}).join("")}
+function vids(v){return v.length?'<div class="media">'+v.map(function(id){return '<button class="vid" data-v="'+id+'" aria-label="Смотреть видео" style="background-image:url(https://i.ytimg.com/vi/'+id+'/hqdefault.jpg)"></button>'}).join("")+"</div>":""}
+function pic(o){return '<img class="pic" src="img/slide'+o+'.jpg" alt="" onerror="this.remove()">'}
+function inner(s){return body(s.b)+vids(s.v)+pic(s.o)}
+
+/* шаги курса */
+var steps=[{k:"intro",g:0,t:"Начало"},{k:"about",g:0,t:"О курсе"},{k:"tl",g:0,t:"Лента времени"}], groups=[{n:"",h:"Введение"}], chFirst={}, g=0, i, s, a;
+for(i=3;i<SLIDES.length;i++){
+  s=SLIDES[i];
+  if(s.k=="h"){g++;groups.push({n:s.b.replace("Глава ",""),h:s.h});chFirst[g]=steps.length;steps.push({k:"h",s:s,g:g,t:"Название главы"})}
+  else if(s.k=="quiz"){if(g<8){g=8;groups.push({n:"",h:"Итоги"})}steps.push({k:"quiz",g:g,t:"Итоговый тест"})}
+  else if(s.k=="end"){steps.push({k:"end",g:g,t:"Завершение"})}
+  else if(s.k=="q"){a=SLIDES[i+1]&&SLIDES[i+1].k=="a"?SLIDES[i+1]:null;steps.push({k:"q",s:s,a:a,g:g,t:"Вопрос"});if(a)i++}
+  else if(s.k=="a"){steps.push({k:"a",s:s,g:g,t:"Ответ"})}
+  else if(s.k=="t"){steps.push({k:"t",s:s,g:g,t:"Задание"})}
+  else steps.push({k:"p",s:s,g:g,t:s.h})
+}
+var cur=0, seen={}, stage=document.getElementById("stage");
+try{seen=JSON.parse(localStorage.getItem("anim-seen")||"{}")}catch(e){}
+
+function toc(){
+  var h="";
+  groups.forEach(function(gr,gi){
+    h+='<div class="grp'+(steps[cur].g==gi?" open":"")+'"><button data-g="'+gi+'"><span>'+(gr.n||"·")+"</span>"+esc(gr.h)+"</button><ul>";
+    steps.forEach(function(st,si){if(st.g==gi&&st.k!="h")h+='<li class="'+(si==cur?"cur ":"")+(seen[si]?"done":"")+'"><button data-s="'+si+'"><i class="dot"></i>'+esc(st.t)+"</button></li>"});
+    h+="</ul></div>";
+  });
+  document.getElementById("toc").innerHTML=h;
+  var n=Object.keys(seen).length, p=Math.round(n/steps.length*100);
+  document.getElementById("pct").textContent=p+"%";
+  document.getElementById("pbar").style.width=p+"%";
+}
+
+function view(st){
+  var s=st.s, gr=groups[st.g], cr='<div class="crumb">'+(gr.n?"Глава "+gr.n+" · ":"")+esc(gr.h)+"</div>";
+  switch(st.k){
+  case "intro": return '<div class="card"><div class="intro"><div><h1>Виртуальная экскурсия по истории <em>анимации</em></h1><p>От наскальных рисунков до скрайбинга: семь глав, видео и творческие задания, которые можно выполнить дома.</p><div class="auth">Авторы курса: Ольга Николаевна Лобанова, педагог дополнительного образования МУ ДО ДДТ «Автограф», г. Нерехта; Нина Дмитриевна Разумова, методист высшей категории.</div><button class="btn" data-s="1">Начать курс</button></div><div class="blob" role="img" aria-label="Рабочий стол иллюстратора"></div></div></div>';
+  case "about":
+    var b=SLIDES[1].b;
+    return cr+"<h2>"+esc(SLIDES[1].h)+'</h2><p style="color:var(--mut);margin-bottom:20px">'+esc(b[0])+"</p>"+[[1,2],[3,4],[5,6]].map(function(p,k){return '<div class="card'+(k==1?" sage":"")+'"><h3>'+esc(b[p[0]].replace(":",""))+"</h3><ul>"+b[p[1]].map(function(t){return "<li>"+esc(t)+"</li>"}).join("")+"</ul></div>"}).join("");
+  case "tl": return cr+"<h2>"+esc(SLIDES[2].h)+'</h2><p style="color:var(--mut);margin-bottom:20px">'+esc(SLIDES[2].b[0])+'</p><div class="card"><div class="tl">'+TL.map(function(t,j){return '<button data-s="'+chFirst[j+1]+'"><b>'+t[0]+"</b><span>"+t[1]+"</span></button>"}).join("")+"</div></div>";
+  case "h": return '<div class="card ch"><i>'+s.b.replace("Глава ","")+"</i><h2>"+esc(s.h)+"</h2></div>";
+  case "q": return cr+'<div class="card dark"><span class="tag">Вопрос</span>'+body(s.b)+vids(s.v)+pic(s.o)+(st.a?'<button class="btn ghost" data-ans>Показать ответ</button><div class="ans" hidden>'+inner(st.a)+"</div>":"")+"</div>";
+  case "a": return cr+'<div class="card dark"><span class="tag">Ответ</span>'+inner(s)+"</div>";
+  case "t": return cr+'<div class="card"><span class="tag t">Задание</span>'+inner(s)+"</div>";
+  case "quiz": return cr+"<h2>Итоговый тест</h2>"+'<div class="card" id="quiz"></div>';
+  case "end": return '<div class="card dark end"><h2>Поздравляем!</h2><p>Ты дошёл до конца и выполнил все задания. Все работы собраны в нашей группе.</p><a class="btn acc" href="'+VK+'" target="_blank" rel="noopener">Открыть группу ВКонтакте</a></div>';
+  default: return cr+'<div class="card"><h2 style="font-size:32px">'+esc(s.h)+"</h2>"+inner(s)+"</div>";
+  }
+}
+
+function go(n){
+  cur=Math.max(0,Math.min(steps.length-1,n));
+  seen[cur]=1;
+  try{localStorage.setItem("anim-seen",JSON.stringify(seen))}catch(e){}
+  stage.innerHTML="<div>"+view(steps[cur])+"</div>";
+  if(steps[cur].k=="quiz"){qi=0;score=0;quiz()}
+  window.scrollTo(0,0);
+  document.getElementById("mid").innerHTML="<span>Шаг </span>"+(cur+1)+" / "+steps.length;
+  document.getElementById("prev").disabled=cur==0;
+  document.getElementById("next").disabled=cur==steps.length-1;
+  document.getElementById("aside").classList.remove("show");
+  toc();
+  if(location.hash!="#"+(cur+1))history.replaceState(null,"","#"+(cur+1));
+  var c=document.querySelector(".grp li.cur");if(c&&c.scrollIntoView)c.scrollIntoView({block:"nearest"});
+}
+
+/* тест */
+var qi=0,score=0;
+function quiz(){
+  var box=document.getElementById("quiz");
+  if(qi>=QUIZ.length){
+    var pct=Math.round(score/QUIZ.length*100),ok=pct>=80;
+    box.innerHTML='<span class="tag">Результат</span><h3>'+(ok?"Тест пройден":"Пока не зачёт")+"</h3><p>Правильных ответов: "+score+" из "+QUIZ.length+" ("+pct+"%). Для зачёта нужно не менее 80%.</p>"+(ok?"":'<button class="btn" id="retry">Пройти заново</button>');
+    var r=document.getElementById("retry");if(r)r.onclick=function(){qi=0;score=0;quiz()};
+    return;
+  }
+  var q=QUIZ[qi];
+  box.innerHTML='<span class="tag">Вопрос '+(qi+1)+" из "+QUIZ.length+"</span><h3>"+esc(q[0])+"</h3>"+q[1].map(function(o,k){return '<button class="opt" data-i="'+k+'">'+esc(o)+"</button>"}).join("");
+  var opts=box.querySelectorAll(".opt");
+  opts.forEach(function(b){b.onclick=function(){
+    opts.forEach(function(x){x.disabled=true});
+    opts[q[2]].classList.add("ok");
+    if(+b.dataset.i==q[2])score++;else b.classList.add("bad");
+    setTimeout(function(){qi++;quiz()},900);
+  }});
+}
+
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-s],[data-g],[data-ans],.vid,#menu");
+  if(!t)return;
+  if(t.dataset.s!==undefined)go(+t.dataset.s);
+  else if(t.dataset.g!==undefined){var f=steps.findIndex(function(x){return x.g==+t.dataset.g});go(f)}
+  else if(t.hasAttribute("data-ans")){var a=t.nextElementSibling;a.hidden=!a.hidden;t.textContent=a.hidden?"Показать ответ":"Скрыть ответ"}
+  else if(t.id=="menu")document.getElementById("aside").classList.toggle("show");
+  else if(t.classList.contains("vid")){t.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+t.dataset.v+'?autoplay=1" allow="autoplay; fullscreen" allowfullscreen title="Видео"></iframe>';t.classList.add("on")}
+});
+document.getElementById("prev").onclick=function(){go(cur-1)};
+document.getElementById("next").onclick=function(){go(cur+1)};
+document.addEventListener("keydown",function(e){if(e.target.tagName=="INPUT")return;if(e.key=="ArrowRight")go(cur+1);if(e.key=="ArrowLeft")go(cur-1)});
+window.addEventListener("hashchange",function(){var n=parseInt(location.hash.slice(1),10);if(n&&n-1!=cur)go(n-1)});
+
+var start=parseInt(location.hash.slice(1),10)-1;
+go(isNaN(start)?0:start);
+</script>
+</body>
+</html>
